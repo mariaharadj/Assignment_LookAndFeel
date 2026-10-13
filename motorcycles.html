@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoTrack | Motorcycle Management</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f5f7;
+            color: #222;
+            line-height: 1.6;
+        }
+        header {
+            background: #151515;
+            color: white;
+            padding: 22px 8%;
+        }
+        .brand { color: #f5a623; font-size: 28px; font-weight: bold; }
+        nav {
+            background: #242424;
+            padding: 14px 8%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        nav a { color: white; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: #f5a623; }
+        main { max-width: 1100px; margin: 35px auto; padding: 0 20px; }
+        .panel {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px #00000012;
+        }
+        h2 { margin-top: 0; }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 16px;
+        }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input, select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px 5px 5px 0;
+        }
+        .primary { background: #f5a623; color: #151515; }
+        .secondary { background: #e4e4e4; color: #222; }
+        .delete { background: #b42318; color: white; }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 650px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #242424; color: white; }
+        .status { color: #276738; font-weight: bold; }
+        footer {
+            background: #151515;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            margin-top: 40px;
+        }
+        @media (max-width: 600px) {
+            nav { gap: 14px; }
+            .panel { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">MotoTrack</div>
+        <p>Motorcycle Explorer & Analytics Hub</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="motorcycles.html">Motorcycle Catalog</a>
+        <a href="analytics.html">Data Analytics</a>
+        <a href="aboutus.html">About Us</a>
+    </nav>
+
+    <main>
+        <section class="panel">
+            <h2>Motorcycle Management</h2>
+            <p>
+                Manage sample motorcycle records using the four CRUD operations:
+                Create, Read, Update, and Delete.
+            </p>
+            <p class="status" id="message" role="status">
+                Sample records loaded.
+            </p>
+        </section>
+
+        <section class="panel">
+            <h2 id="formTitle">Add a Motorcycle</h2>
+            <form id="motorcycleForm">
+                <div class="form-grid">
+                    <div>
+                        <label for="brand">Brand</label>
+                        <input id="brand" required placeholder="e.g., Honda">
+                    </div>
+                    <div>
+                        <label for="model">Model</label>
+                        <input id="model" required placeholder="e.g., CBR500R">
+                    </div>
+                    <div>
+                        <label for="year">Year</label>
+                        <input id="year" type="number" min="1900" max="2100"
+                               required placeholder="e.g., 2025">
+                    </div>
+                    <div>
+                        <label for="type">Motorcycle Type</label>
+                        <select id="type" required>
+                            <option value="">Select a type</option>
+                            <option>Sport</option>
+                            <option>Cruiser</option>
+                            <option>Touring</option>
+                            <option>Adventure</option>
+                            <option>Standard</option>
+                            <option>Dirt</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="price">Sample Price ($)</label>
+                        <input id="price" type="number" min="0" step="100"
+                               required placeholder="e.g., 7500">
+                    </div>
+                </div>
+                <p>
+                    <button class="primary" type="submit" id="saveButton">
+                        Add Motorcycle
+                    </button>
+                    <button class="secondary" type="button" id="cancelButton"
+                            hidden>Cancel Edit</button>
+                </p>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Motorcycle Records</h2>
+            <p id="recordCount"></p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                            <th>Type</th>
+                            <th>Sample Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="motorcycleTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MotoTrack | ISM 6225 Application Development</p>
+        <p>Demonstration using sample data; no database is connected.</p>
+    </footer>
+
+    <script>
+        let motorcycles = [
+            { id: 1, brand: "Honda", model: "CBR500R", year: 2025, type: "Sport", price: 7299 },
+            { id: 2, brand: "Kawasaki", model: "Ninja 650", year: 2025, type: "Sport", price: 8399 },
+            { id: 3, brand: "Harley-Davidson", model: "Iron 883", year: 2022, type: "Cruiser", price: 9999 },
+            { id: 4, brand: "BMW", model: "F 900 GS", year: 2025, type: "Adventure", price: 13795 }
+        ];
+
+        let nextId = 5;
+        let editingId = null;
+
+        const form = document.getElementById("motorcycleForm");
+        const table = document.getElementById("motorcycleTable");
+        const message = document.getElementById("message");
+
+        function showMessage(text) {
+            message.textContent = text;
+        }
+
+        function renderMotorcycles() {
+            table.innerHTML = "";
+
+            motorcycles.forEach(function (bike) {
+                const row = document.createElement("tr");
+
+                [bike.brand, bike.model, bike.year, bike.type,
+                 "$" + Number(bike.price).toLocaleString()].forEach(function (value) {
+                    const cell = document.createElement("td");
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+
+                const actions = document.createElement("td");
+
+                const editButton = document.createElement("button");
+                editButton.textContent = "Edit";
+                editButton.className = "secondary";
+                editButton.type = "button";
+                editButton.addEventListener("click", function () {
+                    editMotorcycle(bike.id);
+                });
+
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.className = "delete";
+                deleteButton.type = "button";
+                deleteButton.addEventListener("click", function () {
+                    deleteMotorcycle(bike.id);
+                });
+
+                actions.appendChild(editButton);
+                actions.appendChild(deleteButton);
+                row.appendChild(actions);
+                table.appendChild(row);
+            });
+
+            document.getElementById("recordCount").textContent =
+                "Total motorcycle records: " + motorcycles.length;
+        }
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const bike = {
+                brand: document.getElementById("brand").value.trim(),
+                model: document.getElementById("model").value.trim(),
+                year: Number(document.getElementById("year").value),
+                type: document.getElementById("type").value,
+                price: Number(document.getElementById("price").value)
+            };
+
+            if (!bike.brand || !bike.model || !bike.type ||
+                !Number.isFinite(bike.year) || !Number.isFinite(bike.price) ||
+                bike.price < 0 || bike.year < 1900 || bike.year > 2100) {
+                showMessage("Please enter valid motorcycle information.");
+                return;
+            }
+
+            if (editingId === null) {
+                bike.id = nextId++;
+                motorcycles.push(bike);
+                showMessage("Motorcycle record added successfully.");
+            } else {
+                bike.id = editingId;
+                motorcycles = motorcycles.map(function (item) {
+                    return item.id === editingId ? bike : item;
+                });
+                showMessage("Motorcycle record updated successfully.");
+            }
+
+            form.reset();
+            editingId = null;
+            document.getElementById("formTitle").textContent = "Add a Motorcycle";
+            document.getElementById("saveButton").textContent = "Add Motorcycle";
+            document.getElementById("cancelButton").hidden = true;
+            renderMotorcycles();
+        });
+
+        function editMotorcycle(id) {
+            const bike = motorcycles.find(function (item) {
+                return item.id === id;
+            });
+
+            if (!bike) return;
+
+            editingId = id;
+            document.getElementById("brand").value = bike.brand;
+            document.getElementById("model").value = bike.model;
+            document.getElementById("year").value = bike.year;
+            document.getElementById("type").value = bike.type;
+            document.getElementById("price").value = bike.price;
+
+            document.getElementById("formTitle").textContent = "Edit Motorcycle";
+            document.getElementById("saveButton").textContent = "Save Changes";
+            document.getElementById("cancelButton").hidden = false;
+            showMessage("Edit the fields above, then save your changes.");
+            form.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function deleteMotorcycle(id) {
+            const bike = motorcycles.find(function (item) {
+                return item.id === id;
+            });
+
+            if (!bike) return;
+
+            if (confirm("Delete " + bike.brand + " " + bike.model + "?")) {
+                motorcycles = motorcycles.filter(function (item) {
+                    return item.id !== id;
+                });
+
+                if (editingId === id) resetForm();
+                renderMotorcycles();
+                showMessage("Motorcycle record deleted.");
+            }
+        }
+
+        function resetForm() {
+            form.reset();
+            editingId = null;
+            document.getElementById("formTitle").textContent = "Add a Motorcycle";
+            document.getElementById("saveButton").textContent = "Add Motorcycle";
+            document.getElementById("cancelButton").hidden = true;
+        }
+
+        document.getElementById("cancelButton").addEventListener("click", function () {
+            resetForm();
+            showMessage("Edit cancelled.");
+        });
+
+        renderMotorcycles();
+    </script>
+</body>
+</html>
