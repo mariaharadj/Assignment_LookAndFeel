@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoTrack | Motorcycle Analytics</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f5f7;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #151515;
+            color: white;
+            padding: 22px 8%;
+        }
+
+        .brand {
+            color: #f5a623;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            background: #242424;
+            padding: 14px 8%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover { color: #f5a623; }
+
+        main {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .intro, .chart-panel, .note {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px #00000012;
+        }
+
+        h2 { margin-top: 0; }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: #242424;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .stat h3 {
+            color: #f5a623;
+            margin: 0 0 8px;
+        }
+
+        .stat p {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+
+        footer {
+            background: #151515;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            nav { gap: 14px; }
+            .chart-container { height: 300px; }
+            .intro, .chart-panel, .note { padding: 16px; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="brand">MotoTrack</div>
+        <p>Motorcycle Explorer & Analytics Hub</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="motorcycles.html">Motorcycle Catalog</a>
+        <a href="analytics.html">Data Analytics</a>
+        <a href="aboutus.html">About Us</a>
+    </nav>
+
+    <main>
+        <section class="intro">
+            <h2>Motorcycle Data Analytics</h2>
+            <p>
+                This dashboard explores sample motorcycle prices across
+                several motorcycle categories. The charts demonstrate how
+                data visualization can help users compare information
+                and identify differences between categories.
+            </p>
+        </section>
+
+        <section class="summary">
+            <div class="stat">
+                <h3>Sample Records</h3>
+                <p>6</p>
+            </div>
+            <div class="stat">
+                <h3>Categories</h3>
+                <p>4</p>
+            </div>
+            <div class="stat">
+                <h3>Currency</h3>
+                <p>USD ($)</p>
+            </div>
+        </section>
+
+        <section class="chart-panel">
+            <h2>Average Sample Price by Motorcycle Type</h2>
+            <p>
+                Compare the average sample price assigned to each
+                motorcycle category in this demonstration dataset.
+            </p>
+            <div class="chart-container">
+                <canvas id="priceChart"
+                        aria-label="Bar chart comparing average sample motorcycle prices by category"
+                        role="img"></canvas>
+            </div>
+        </section>
+
+        <section class="chart-panel">
+            <h2>Distribution of Sample Motorcycle Records</h2>
+            <p>
+                This chart shows how the six demonstration records
+                are distributed across motorcycle categories.
+            </p>
+            <div class="chart-container">
+                <canvas id="categoryChart"
+                        aria-label="Doughnut chart showing motorcycle records by category"
+                        role="img"></canvas>
+            </div>
+        </section>
+
+        <section class="note">
+            <h2>Understanding the Results</h2>
+            <p>
+                The charts provide a visual comparison of the sample
+                prices and category counts. The results describe only
+                the demonstration records, not the entire motorcycle
+                market.
+            </p>
+            <p>
+                <strong>Data limitation:</strong> The values on this page
+                are illustrative sample data created for the assignment.
+                They have not been collected from a market survey or
+                verified against current motorcycle listings.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MotoTrack | ISM 6225 Application Development</p>
+        <p>Motorcycle analytics demonstration</p>
+    </footer>
+
+    <script>
+        // Illustrative data created for this student project.
+        const categories = ["Sport", "Cruiser", "Adventure", "Touring"];
+        const averagePrices = [8500, 11000, 13500, 16000];
+        const recordCounts = [2, 2, 1, 1];
+
+        new Chart(document.getElementById("priceChart"), {
+            type: "bar",
+            data: {
+                labels: categories,
+                datasets: [{
+                    label: "Average Sample Price ($)",
+                    data: averagePrices,
+                    backgroundColor: [
+                        "#f5a623",
+                        "#444444",
+                        "#777777",
+                        "#b87508"
+                    ],
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Price in US Dollars ($)"
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Motorcycle Category"
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: true }
+                }
+            }
+        });
+
+        new Chart(document.getElementById("categoryChart"), {
+            type: "doughnut",
+            data: {
+                labels: categories,
+                datasets: [{
+                    label: "Number of Sample Records",
+                    data: recordCounts,
+                    backgroundColor: [
+                        "#f5a623",
+                        "#444444",
+                        "#777777",
+                        "#b87508"
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: "bottom"
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
