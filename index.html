@@ -1,1 +1,219 @@
-<!--Your HTML code here-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoTrack | Motorcycle Explorer</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f5f7;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #151515;
+            color: white;
+            padding: 22px 8%;
+        }
+
+        .brand {
+            color: #f5a623;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            background: #242424;
+            padding: 14px 8%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #f5a623;
+        }
+
+        .hero {
+            background: #303030;
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 0 auto 25px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #f5a623;
+            color: #151515;
+            padding: 12px 22px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #00000012;
+        }
+
+        .card h3 {
+            color: #b87508;
+            margin-bottom: 10px;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #915b00;
+            font-weight: bold;
+        }
+
+        .note {
+            background: white;
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+
+        footer {
+            background: #151515;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            margin-top: 45px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            nav {
+                gap: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">MotoTrack</div>
+        <p>Your Motorcycle Explorer & Analytics Hub</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="motorcycles.html">Motorcycle Catalog</a>
+        <a href="analytics.html">Data Analytics</a>
+        <a href="aboutus.html">About Us</a>
+    </nav>
+
+    <section class="hero">
+        <h1>Explore the World of Motorcycles</h1>
+        <p>
+            Discover motorcycle brands, compare prices, explore different
+            motorcycle categories, and learn how data can help riders
+            make informed decisions.
+        </p>
+        <a class="button" href="motorcycles.html">Explore the Catalog</a>
+    </section>
+
+    <main>
+        <h2 class="section-title">What You Can Do with MotoTrack</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Motorcycle Catalog</h3>
+                <p>
+                    Explore sample motorcycle records by brand, model,
+                    year, category, and price.
+                </p>
+                <a href="motorcycles.html">Explore motorcycles &rarr;</a>
+            </div>
+
+            <div class="card">
+                <h3>Manage Motorcycle Data</h3>
+                <p>
+                    Add new motorcycle records, view existing entries,
+                    update information, and remove records.
+                </p>
+                <a href="motorcycles.html">Manage records &rarr;</a>
+            </div>
+
+            <div class="card">
+                <h3>Motorcycle Analytics</h3>
+                <p>
+                    View charts that compare motorcycle categories
+                    and sample prices.
+                </p>
+                <a href="analytics.html">View analytics &rarr;</a>
+            </div>
+        </div>
+
+        <section class="note">
+            <h2>Why Motorcycle Data Matters</h2>
+            <p>
+                Motorcycle data can help riders compare models, understand
+                price differences, and explore the features of different
+                types of motorcycles. MotoTrack demonstrates how a website
+                can organize information and present it in a useful format.
+            </p>
+            <p>
+                <strong>Project note:</strong> The motorcycle information
+                used in this student project will be sample data for
+                demonstrating website features and data visualization.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MotoTrack | ISM 6225 Application Development</p>
+        <p>Educational website project</p>
+    </footer>
+
+</body>
+</html>
