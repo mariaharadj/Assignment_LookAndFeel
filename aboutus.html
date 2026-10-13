@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoTrack | About Us</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f5f7;
+            color: #222;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #151515;
+            color: white;
+            padding: 22px 8%;
+        }
+
+        .brand {
+            color: #f5a623;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            background: #242424;
+            padding: 14px 8%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover { color: #f5a623; }
+
+        main {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .panel {
+            background: white;
+            padding: 28px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px #00000012;
+        }
+
+        h2 { color: #915b00; }
+
+        .tech-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .tech-item {
+            background: #f4f5f7;
+            border-left: 4px solid #f5a623;
+            padding: 16px;
+            border-radius: 5px;
+        }
+
+        .github-link {
+            display: inline-block;
+            background: #f5a623;
+            color: #151515;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #151515;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            nav { gap: 14px; }
+            .panel { padding: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="brand">MotoTrack</div>
+        <p>Motorcycle Explorer & Analytics Hub</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="motorcycles.html">Motorcycle Catalog</a>
+        <a href="analytics.html">Data Analytics</a>
+        <a href="aboutus.html">About Us</a>
+    </nav>
+
+    <main>
+        <section class="panel">
+            <h1>About MotoTrack</h1>
+            <p>
+                MotoTrack is a student-developed website designed to
+                demonstrate how web technologies can organize, manage,
+                and visualize motorcycle-related information.
+            </p>
+            <p>
+                The website allows users to explore sample motorcycle
+                records, perform basic record-management operations,
+                and view charts comparing motorcycle categories and
+                illustrative prices.
+            </p>
+        </section>
+
+        <section class="panel">
+            <h2>About the Developer</h2>
+            <p>
+                I am a student in the Application Development course
+                (ISM 6225). I created MotoTrack as an opportunity to
+                practice building a user-friendly website using
+                HTML, CSS, and JavaScript.
+            </p>
+            <p>
+                During this project, I worked on structuring webpages,
+                creating consistent navigation, styling responsive
+                layouts, building interactive forms, and presenting
+                data through visualizations. The project helped me
+                understand how these technologies work together to
+                create a functional web interface.
+            </p>
+        </section>
+
+        <section class="panel">
+            <h2>Technologies Used</h2>
+            <div class="tech-list">
+                <div class="tech-item">
+                    <h3>HTML5</h3>
+                    <p>Structures the content and elements on each webpage.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>CSS3</h3>
+                    <p>Creates the layout, colors, styling, and responsive design.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>JavaScript</h3>
+                    <p>Supports interactive forms and motorcycle record operations.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>Chart.js</h3>
+                    <p>Creates charts for the motorcycle analytics dashboard.</p>
+                </div>
+                <div class="tech-item">
+                    <h3>GitHub</h3>
+                    <p>Stores and manages the website's source code.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Project Scope</h2>
+            <p>
+                MotoTrack uses illustrative sample data to demonstrate
+                website functionality. It is a static educational
+                project and does not connect to a live motorcycle
+                database or store records permanently.
+            </p>
+            <p>
+                The project demonstrates how a future data-driven
+                motorcycle application could support information
+                management and basic comparisons.
+            </p>
+        </section>
+
+        <section class="panel">
+            <h2>View the Source Code</h2>
+            <p>
+                The complete website source code is maintained in
+                the project's GitHub repository.
+            </p>
+            <a class="github-link"
+               href="https://github.com/mariaharadj/Assignment_LookAndFeel"
+               target="_blank" rel="noopener noreferrer">
+                View GitHub Repository
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MotoTrack | ISM 6225 Application Development</p>
+        <p>Student website project</p>
+    </footer>
+</body>
+</html>
